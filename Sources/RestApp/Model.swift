@@ -32,6 +32,7 @@ import RestStorage
     @Published var interruptionReason: String?
     private var lastMicrophoneCheck: TimeInterval = -.infinity
     private var previousReviewID: UUID?
+    let updates = UpdateManager()
     let store = StatisticsStore()
     private var timer: Timer?
     private var tokens: [NSObjectProtocol] = []

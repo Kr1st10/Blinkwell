@@ -53,6 +53,7 @@ struct PanelView: View {
                 Label("Угостить разработчика кофе", systemImage: "cup.and.saucer").font(.system(size: 12))
                     .frame(maxWidth: .infinity).padding(12).background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
             }.buttonStyle(.plain)
+            UpdateCheckButton(manager:model.updates,close:close)
             Divider()
             HStack {
                 Button("Открыть окно") { close(); model.showMain() }

@@ -26,8 +26,14 @@ import SwiftUI
         let controller = NSHostingController(rootView: PanelView(model: model) { [weak self] in self?.popover.performClose(nil) })
         controller.sizingOptions = [.preferredContentSize]
         popover.contentViewController = controller
+        model.updates.beforeCheck = { [weak self] in self?.popover.performClose(nil) }
+        model.updates.beforeInstall = { [weak self] in self?.model.flush() }
+        let updateItem = NSMenuItem(title:"Проверить обновления…",action:#selector(checkForUpdates),keyEquivalent:"")
+        updateItem.target = self; appMenu.insertItem(updateItem,at:2)
+        model.updates.start()
         if !model.preferences.hideDockIcon { model.showMain() }
     }
+    @objc private func checkForUpdates() { model.updates.check() }
     @objc private func togglePanel() {
         guard let button = item.button else { return }
         if popover.isShown { popover.performClose(nil); return }

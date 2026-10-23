@@ -147,7 +147,7 @@ struct MainView: View {
             HStack {
                 Label("Работает и без сети", systemImage: "lock.shield")
                 Spacer()
-                Text("macOS · Blinkwell 0.5.3")
+                Text("macOS · Blinkwell \(Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String ?? "")")
             }.font(.system(size: 10)).foregroundStyle(.tertiary)
         }
     }
@@ -253,6 +253,7 @@ struct PreferencesView: View {
                     Text("Таймеры продолжают работать. Напоминание появится после тихих часов. Одинаковые часы означают тишину весь день.").font(.caption).foregroundStyle(.secondary)
                 }
             }
+            Section("Обновления") { UpdateSettingsView(manager:model.updates) }
             Section("Приложение") {
                 Toggle("Скрывать значок в Dock",isOn:$model.preferences.hideDockIcon)
                 Text("Blinkwell останется в строке меню, без значка в Dock и ⌘Tab. Открыть окно, настройки и завершить приложение можно через листочек. Настройка применяется сразу; при следующем запуске главное окно не откроется автоматически.").font(.caption).foregroundStyle(.secondary)
