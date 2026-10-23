@@ -20,12 +20,15 @@ final class PreferencesTests: XCTestCase {
         XCTAssertTrue(preferences.animations)
         XCTAssertTrue(preferences.deferMicrophone)
         XCTAssertTrue(preferences.resumeAfterWake)
+        XCTAssertFalse(preferences.hideDockIcon)
     }
     func testNewSelectionAndAnimationPersistAcrossRoundTrip() throws {
         var original = Preferences()
+        original.hideDockIcon = true
         original.exerciseIDs = ["posture", "distance"]
         original.resumeAfterWake = false; original.deferMicrophone = false; original.animations = false; original.automaticExercises = false
         let restored = try JSONDecoder().decode(Preferences.self, from: JSONEncoder().encode(original))
+        XCTAssertTrue(restored.hideDockIcon)
         XCTAssertEqual(restored.exercises, [.posture, .distance])
         XCTAssertFalse(restored.resumeAfterWake)
         XCTAssertFalse(restored.deferMicrophone)

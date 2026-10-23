@@ -12,6 +12,7 @@ public struct Preferences: Codable {
     public var naturalRest = true
     public var deferMicrophone = true
     public var resumeAfterWake = true
+    public var hideDockIcon = false
     public var sound = true
     public var popup = true
     public var quietEnabled = false
@@ -31,7 +32,7 @@ public struct Preferences: Codable {
              eyesEnabled, bodyEnabled, smart, naturalRest, sound, popup,
              quietEnabled, quietStart, quietEnd, appearance,
              personalText, personalSymbol, personalColor,
-             exerciseIDs, automaticExercises, animations, deferMicrophone, resumeAfterWake
+             exerciseIDs, automaticExercises, animations, deferMicrophone, resumeAfterWake, hideDockIcon
     }
 
     // New preferences must not erase existing settings from an earlier app version.
@@ -47,6 +48,7 @@ public struct Preferences: Codable {
         eyesEnabled = try c.decodeIfPresent(Bool.self, forKey: .eyesEnabled) ?? eyesEnabled
         bodyEnabled = try c.decodeIfPresent(Bool.self, forKey: .bodyEnabled) ?? bodyEnabled
         smart = try c.decodeIfPresent(Bool.self, forKey: .smart) ?? smart
+        hideDockIcon = try c.decodeIfPresent(Bool.self, forKey: .hideDockIcon) ?? hideDockIcon
         resumeAfterWake = try c.decodeIfPresent(Bool.self, forKey: .resumeAfterWake) ?? resumeAfterWake
         deferMicrophone = try c.decodeIfPresent(Bool.self, forKey: .deferMicrophone) ?? deferMicrophone
         naturalRest = try c.decodeIfPresent(Bool.self, forKey: .naturalRest) ?? naturalRest

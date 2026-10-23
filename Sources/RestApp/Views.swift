@@ -147,7 +147,7 @@ struct MainView: View {
             HStack {
                 Label("Работает и без сети", systemImage: "lock.shield")
                 Spacer()
-                Text("macOS · Blinkwell 0.5.2")
+                Text("macOS · Blinkwell 0.5.3")
             }.font(.system(size: 10)).foregroundStyle(.tertiary)
         }
     }
@@ -254,6 +254,8 @@ struct PreferencesView: View {
                 }
             }
             Section("Приложение") {
+                Toggle("Скрывать значок в Dock",isOn:$model.preferences.hideDockIcon)
+                Text("Blinkwell останется в строке меню, без значка в Dock и ⌘Tab. Открыть окно, настройки и завершить приложение можно через листочек. Настройка применяется сразу; при следующем запуске главное окно не откроется автоматически.").font(.caption).foregroundStyle(.secondary)
                 Toggle("Запускать Blinkwell при входе в macOS", isOn: Binding(get: { model.launchEnabled }, set: { model.setLaunch($0) }))
                 Toggle("Возобновлять учёт после сна и разблокировки",isOn:$model.preferences.resumeAfterWake)
                 Text("После пробуждения учёт начинается без открытия окна и клика мышью. Эта настройка также снимает ручную паузу после сна или блокировки. Для запуска после перезагрузки включи автозапуск выше. Если завершить приложение через ⌘Q, оно запустится при следующем входе в macOS.").font(.caption).foregroundStyle(.secondary)

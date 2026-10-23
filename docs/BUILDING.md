@@ -13,7 +13,7 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer swift test
 
 ```sh
 mkdir -p release
-ditto -c -k --sequesterRsrc --keepParent build/Blinkwell.app release/Blinkwell-macOS-0.5.2-arm64.zip
+ditto -c -k --sequesterRsrc --keepParent build/Blinkwell.app release/Blinkwell-macOS-0.5.3-arm64.zip
 ```
 
 Для DMG:
@@ -22,7 +22,7 @@ ditto -c -k --sequesterRsrc --keepParent build/Blinkwell.app release/Blinkwell-m
 mkdir -p build/dmg
 ditto build/Blinkwell.app build/dmg/Blinkwell.app
 ln -s /Applications build/dmg/Applications
-hdiutil create -volname Blinkwell -srcfolder build/dmg -format UDZO release/Blinkwell-macOS-0.5.2-arm64.dmg
+hdiutil create -volname Blinkwell -srcfolder build/dmg -format UDZO release/Blinkwell-macOS-0.5.3-arm64.dmg
 ```
 
 Не включай в репозиторий или релиз SQLite пользователей, настройки, ключи, содержимое .build и локальные пути. В release должны быть только приложение/дистрибутивы и контрольные суммы. Приложение проверяется командой `codesign --verify --deep --strict build/Blinkwell.app`; это проверка целостности локальной подписи, а не подтверждение Apple или тест всех сценариев интерфейса.

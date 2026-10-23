@@ -26,7 +26,7 @@ import SwiftUI
         let controller = NSHostingController(rootView: PanelView(model: model) { [weak self] in self?.popover.performClose(nil) })
         controller.sizingOptions = [.preferredContentSize]
         popover.contentViewController = controller
-        model.showMain()
+        if !model.preferences.hideDockIcon { model.showMain() }
     }
     @objc private func togglePanel() {
         guard let button = item.button else { return }
@@ -45,7 +45,7 @@ import SwiftUI
     private func configurePopoverWindow() {
         guard let window = popover.contentViewController?.view.window else { return }
         // Preserve AppKit's popover behavior while replacing mutually exclusive
-        // Space/full-screen flags. No global activation-policy or Dock changes.
+        // Space/full-screen flags. Dock visibility is controlled only by the user setting.
         var behavior = window.collectionBehavior
         behavior.subtract([.moveToActiveSpace, .fullScreenPrimary, .fullScreenNone, .primary, .auxiliary])
         behavior.formUnion([.canJoinAllSpaces, .fullScreenAuxiliary, .canJoinAllApplications])
@@ -62,7 +62,7 @@ import SwiftUI
     @MainActor static func main() {
         let app = NSApplication.shared
         let delegate = AppDelegate()
-        app.setActivationPolicy(.regular); app.delegate = delegate
+        app.setActivationPolicy(AppModel.loadPreferences().hideDockIcon ? .accessory : .regular); app.delegate = delegate
         withExtendedLifetime(delegate) { app.run() }
     }
 }

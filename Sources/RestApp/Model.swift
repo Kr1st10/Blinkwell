@@ -49,10 +49,14 @@ import RestStorage
     private var wasReading = false
     private var idleBaseline: TimeInterval?
 
+    static func loadPreferences() -> Preferences {
+        guard let data = UserDefaults.standard.data(forKey:"preferences"),
+              let value = try? JSONDecoder().decode(Preferences.self,from:data) else { return Preferences() }
+        return value
+    }
+
     override init() {
-        if let data = UserDefaults.standard.data(forKey: "preferences"),
-           let value = try? JSONDecoder().decode(Preferences.self, from: data) { preferences = value }
-        else { preferences = Preferences() }
+        preferences = Self.loadPreferences()
         super.init()
         configure()
         UNUserNotificationCenter.current().delegate = self
@@ -98,6 +102,19 @@ import RestStorage
         })
     }
     private func configure() {
+        let policy: NSApplication.ActivationPolicy = preferences.hideDockIcon ? .accessory : .regular
+        if NSApp.activationPolicy() != policy {
+            let visibleWindows = NSApp.windows.filter { $0.isVisible && !$0.isMiniaturized }
+            let keyWindow = NSApp.keyWindow
+            if NSApp.setActivationPolicy(policy) {
+                // Switching to accessory can hide windows on some macOS versions.
+                // Keep an already-open settings window usable without another launch.
+                for window in visibleWindows { window.orderFrontRegardless() }
+                keyWindow?.makeKey()
+            } else {
+                message = "macOS не смогла изменить значок Dock. Настройка сохранена — перезапусти Blinkwell, чтобы применить её."
+            }
+        }
         lastMicrophoneCheck = -.infinity
         var config = TimerConfiguration()
         config.eyesInterval = Double(max(1, preferences.eyesMinutes) * 60)
