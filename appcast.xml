@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><!-- sparkle-sign-warning:
+IMPORTANT: This file was signed by Sparkle. Any modifications to this file requires re-signing this file with generate_appcast or sign_update! The signed signature will be embedded at the end of this file.
+--><rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+  <channel>
+    <title>Blinkwell updates</title>
+    <link>https://github.com/Kr1st10/Blinkwell</link>
+    <item>
+      <title>Blinkwell 0.5.4</title>
+      <pubDate>Fri, 23 Oct 2026 07:10:13 +0000</pubDate>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description>Новая версия Blinkwell. Перед перезапуском статистика сохраняется. Подробности изменений — на странице релиза GitHub.</description>
+      <enclosure url="https://github.com/Kr1st10/Blinkwell/releases/download/v0.5.4/Blinkwell-macOS-0.5.4-arm64.zip" length="1550076" type="application/octet-stream" sparkle:version="10" sparkle:shortVersionString="0.5.4" sparkle:edSignature="qH/+L2gTK1OP3y7MDO/UCx1ujrHDuXQjrNf7FYy/MHsiJSYA9iT9K+CFzawf5BYs2IjDStaXbLrwZZlT49FVCQ=="></enclosure>
+    </item>
+  </channel>
+</rss><!-- sparkle-signatures:
+edSignature: mTCtM3/U7rp/x9v9DzpzQPmjjc4f4SQId0l4QhbvfhY6d6sdKkKzMt2vqaFDLTI3w5BL2ON1SzrlHqTTGVJAAA==
+length: 1274
+-->
